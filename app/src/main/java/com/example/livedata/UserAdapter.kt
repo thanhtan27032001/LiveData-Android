@@ -23,11 +23,11 @@ class UserAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false))
     }
 
-    override fun onBindViewHolder(holder: UserAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val user = userList[position]
 
         holder.imgAvatar.setImageResource(user.avatar)
