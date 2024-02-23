@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), UserClickListener {
     val mainViewModel: MainViewModel by viewModels()
 
     private lateinit var userAdapter: UserAdapter
@@ -55,5 +55,9 @@ class MainActivity : AppCompatActivity() {
     private fun setView() {
         rvUser = findViewById(R.id.rvUser)
         btnAddUser = findViewById(R.id.btnAdd)
+    }
+
+    override fun onUserRemoveButtonClick(position: Int) {
+        mainViewModel.removeUser(position)
     }
 }

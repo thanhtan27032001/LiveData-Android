@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class UserAdapter(
-    private val context: MainActivity,
+    private val userClickListener: UserClickListener,
     private val userList: ArrayList<User>
 ): RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
 
@@ -39,7 +39,7 @@ class UserAdapter(
         holder.tvIntro.text = user.intro
 
         holder.btnRemove.setOnClickListener {
-            context.mainViewModel.removeUser(position)
+            userClickListener.onUserRemoveButtonClick(position)
         }
     }
 
