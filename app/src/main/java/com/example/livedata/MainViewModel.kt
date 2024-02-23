@@ -4,23 +4,31 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-    var userList: ArrayList<User>
+    var userList: ArrayList<User> = arrayListOf()
 
-    val userListSize = MutableLiveData<Int>().apply {
+    val userListAddPosition = MutableLiveData<Int>().apply {
         value = 0
-        userList = arrayListOf()
+    }
+
+    val userListRemovePosition = MutableLiveData<Int>().apply {
+        value = 0
     }
 
     fun addUser() {
         System.out.println("add new user")
+        userListAddPosition.value = userList.size
         userList.add(
             User(
-                "Nguyễn Tân",
+                "Nguyễn Tân ${userListAddPosition.value}",
                 "Đây là giới thiệu của Nguyễn Tân",
                 R.drawable.ic_launcher_foreground
             )
         )
-        userListSize.value = userList.size
+    }
+
+    fun removeUser(position: Int) {
+        userList.removeAt(position)
+        userListRemovePosition.value = position
     }
 
 }
