@@ -27,8 +27,9 @@ class MainViewModel : ViewModel() {
     }
 
     fun removeUser(position: Int) {
-        userList.removeAt(position)
+        System.out.println("remove postion $position")
         userListRemovePosition.value = position
+        userList.removeAt(position)
     }
 
 }

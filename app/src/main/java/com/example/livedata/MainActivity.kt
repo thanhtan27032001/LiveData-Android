@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
-    private val mainViewModel: MainViewModel by viewModels()
+    val mainViewModel: MainViewModel by viewModels()
 
     private lateinit var userAdapter: UserAdapter
     private lateinit var rvUser: RecyclerView
@@ -28,14 +28,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeLiveData() {
-        mainViewModel.userListAddPosition.observe(this, Observer {newUserListAddPosition ->
+        mainViewModel.userListAddPosition.observe(this) {newUserListAddPosition ->
             System.out.println("data changed!!!")
             userAdapter.notifyItemInserted(newUserListAddPosition)
-        })
+        }
+
+        mainViewModel.userListRemovePosition.observe(this) {newUserListRemovePosition ->
+            userAdapter.notifyItemRemoved(newUserListRemovePosition)
+            userAdapter.notifyItemRangeChanged(newUserListRemovePosition, mainViewModel.userList.size)
+        }
     }
 
     private fun setupUserRecyclerView() {
-        userAdapter = UserAdapter(mainViewModel.userList)
+        userAdapter = UserAdapter(this, mainViewModel.userList)
 
         rvUser.adapter = userAdapter
         rvUser.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false)

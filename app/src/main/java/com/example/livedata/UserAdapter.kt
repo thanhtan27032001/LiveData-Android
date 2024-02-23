@@ -3,11 +3,13 @@ package com.example.livedata
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class UserAdapter(
+    private val context: MainActivity,
     private val userList: ArrayList<User>
 ): RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
 
@@ -15,11 +17,13 @@ class UserAdapter(
         var imgAvatar: ImageView
         var tvName: TextView
         var tvIntro: TextView
+        var btnRemove: ImageButton
 
         init {
             imgAvatar = itemView.findViewById(R.id.imgAvatar)
             tvName = itemView.findViewById(R.id.tvName)
             tvIntro = itemView.findViewById(R.id.tvIntro)
+            btnRemove = itemView.findViewById(R.id.btnRemove)
         }
     }
 
@@ -33,6 +37,10 @@ class UserAdapter(
         holder.imgAvatar.setImageResource(user.avatar)
         holder.tvName.text = user.name
         holder.tvIntro.text = user.intro
+
+        holder.btnRemove.setOnClickListener {
+            context.mainViewModel.removeUser(position)
+        }
     }
 
     override fun getItemCount(): Int {
