@@ -15,7 +15,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun addUser() {
-        System.out.println("add new user")
+        println("add new user")
         userListAddPosition.value = userList.size
         userList.add(
             User(
@@ -27,7 +27,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun removeUser(position: Int) {
-        System.out.println("remove postion $position")
+        println("remove postion $position")
         userListRemovePosition.value = position
         userList.removeAt(position)
     }

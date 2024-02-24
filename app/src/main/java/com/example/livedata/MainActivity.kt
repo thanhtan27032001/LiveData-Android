@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), UserClickListener {
-    val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
     private lateinit var userAdapter: UserAdapter
     private lateinit var rvUser: RecyclerView
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity(), UserClickListener {
 
     private fun observeLiveData() {
         mainViewModel.userListAddPosition.observe(this) {newUserListAddPosition ->
-            System.out.println("data changed!!!")
+            println("data changed!!!")
             userAdapter.notifyItemInserted(newUserListAddPosition)
         }
 
